@@ -1,18 +1,23 @@
 <?php
 
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\PlayerController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+// Landing page
+Route::get('/', [GameController::class, 'index'])->name('home');
+Route::get('/game/lobby', [GameController::class, 'lobby'])->name('game.lobby');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Game routes
+Route::post('/game/create', [GameController::class, 'createGame'])->name('game.create');
+Route::get('/game/{game}', [GameController::class, 'show'])->name('game.show');
+
+// QR Code generation
+Route::get('/qr/{side}', [GameController::class, 'generateQrPlayer'])->name('qr.generate');
+
+// Player routes (untuk controller/HP)
+Route::get('/join/{side}', [PlayerController::class, 'showJoinPage'])->name('player.join');
+Route::post('/join/{side}', [PlayerController::class, 'submitJoin'])->name('player.submitJoin');
+Route::get('/player/{player}/controller', [PlayerController::class, 'showController'])->name('player.controller');
+Route::post('/player/{player}/answer', [PlayerController::class, 'submitAnswer'])->name('player.answer');
+

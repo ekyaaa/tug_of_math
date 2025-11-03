@@ -37,4 +37,10 @@ class GameModel extends Model
     {
         return $this->hasMany(QuestionModel::class, 'game_id');
     }
+
+    // Method untuk mendapatkan semua players dalam game
+    public function players()
+    {
+        return PlayerModel::whereIn('id', [$this->player1_id, $this->player2_id]);
+    }
 }
