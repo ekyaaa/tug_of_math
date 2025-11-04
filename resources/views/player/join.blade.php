@@ -75,19 +75,17 @@
                 const response = await axios.post(`/join/${side}`, { name });
                 playerId = response.data.player_id;
                 
-            console.log('Join response:', response.data);
+                console.log('Join response:', response.data);
                 
                 // Show waiting screen
                 document.getElementById('join-form').classList.add('hidden');
                 document.getElementById('waiting-screen').classList.remove('hidden');
                 
-                // Listen for game start
-                window.Echo.channel('game-channel')
-                    .listen('.game.started', function(data) {
-                        console.log('Game started:', data);
-                        // Redirect to player controller page
-                        window.location.href = `/player/${playerId}/controller`;
-                    });
+                // Langsung redirect ke controller dengan player ID
+                console.log('Redirecting to controller:', `/player/${playerId}/controller`);
+                setTimeout(() => {
+                    window.location.href = `/player/${playerId}/controller`;
+                }, 500);
                 
             } catch (error) {
                 console.error('Error joining game:', error);

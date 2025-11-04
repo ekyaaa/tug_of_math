@@ -1,5 +1,5 @@
 {
-  "authHost": "http://127.0.0.1:8000",
+  "authHost": "http://172.16.106.148:8000",
   "authEndpoint": "/broadcasting/auth",
   "clients": [],
   "database": "redis",

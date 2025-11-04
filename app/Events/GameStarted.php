@@ -15,12 +15,16 @@ class GameStarted implements ShouldBroadcast
     public $gameId;
     public $player1Id;
     public $player2Id;
+    public $question1;
+    public $question2;
 
-    public function __construct($gameId, $player1Id, $player2Id)
+    public function __construct($gameId, $player1Id, $player2Id, $question1, $question2)
     {
         $this->gameId = $gameId;
         $this->player1Id = $player1Id;
         $this->player2Id = $player2Id;
+        $this->question1 = $question1;
+        $this->question2 = $question2;
     }
 
     public function broadcastOn()
@@ -31,5 +35,16 @@ class GameStarted implements ShouldBroadcast
     public function broadcastAs()
     {
         return 'game.started';
+    }
+
+    public function broadcastWith()
+    {
+        return [
+            'gameId' => $this->gameId,
+            'player1Id' => $this->player1Id,
+            'player2Id' => $this->player2Id,
+            'question1' => $this->question1,
+            'question2' => $this->question2,
+        ];
     }
 }

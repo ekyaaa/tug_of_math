@@ -184,6 +184,7 @@
                 gameId = response.data.id;
                 console.log('✅ Game created:', response.data);
                 
+                // Redirect ke game show (countdown akan otomatis start saat semua device ready)
                 window.location.href = `/game/${gameId}`;
             } catch (error) {
                 console.error('❌ Error creating game:', error);

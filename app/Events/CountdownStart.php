@@ -8,26 +8,22 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class PlayerQuestionUpdated implements ShouldBroadcast
+class CountdownStart implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $playerId;
-    public $question;
-
-    public function __construct($playerId, $question)
+    public function __construct()
     {
-        $this->playerId = $playerId;
-        $this->question = $question;
+        //
     }
 
     public function broadcastOn()
     {
-        return new Channel('game-channel'); // channel publik
+        return new Channel('game-channel');
     }
 
     public function broadcastAs()
     {
-        return 'player.question.updated';
+        return 'countdown.start';
     }
 }

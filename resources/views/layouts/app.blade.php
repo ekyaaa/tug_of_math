@@ -19,15 +19,6 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        .rope-animation {
-            animation: swing 2s ease-in-out infinite;
-        }
-
-        @keyframes swing {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(-10px); }
-        }
-
         .player-card {
             transition: all 0.3s ease;
         }
@@ -63,7 +54,7 @@
         // Setup Laravel Echo with Socket.io v2
         window.Echo = new Echo({
             broadcaster: 'socket.io',
-            host: '172.16.89.225:6001',
+            host: '172.16.106.148:6001',
             transports: ['websocket', 'polling', 'flashsocket']
         });
 
