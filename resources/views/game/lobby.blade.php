@@ -13,8 +13,8 @@
         <div class="grid grid-cols-2 gap-12 mb-12">
             <!-- Left Player QR/Character -->
             <div class="text-center">
-                <div id="left-qr-container" class="bg-white rounded-2xl p-8 mb-4 transform hover:scale-105 transition-all">
-                    <div id="qr-left" class="mx-auto"></div>
+                <div id="left-qr-container" class="bg-white rounded-2xl p-8 mb-4 transform hover:scale-105 transition-all flex items-center justify-center">
+                    <div id="qr-left"></div>
                 </div>
                 <div id="left-character-container" class="hidden bg-white rounded-2xl p-8 mb-4">
                     <div class="text-8xl mb-4">🧑</div>
@@ -28,8 +28,8 @@
 
             <!-- Right Player QR/Character -->
             <div class="text-center">
-                <div id="right-qr-container" class="bg-white rounded-2xl p-8 mb-4 transform hover:scale-105 transition-all">
-                    <div id="qr-right" class="mx-auto"></div>
+                <div id="right-qr-container" class="bg-white rounded-2xl p-8 mb-4 transform hover:scale-105 transition-all flex items-center justify-center">
+                    <div id="qr-right"></div>
                 </div>
                 <div id="right-character-container" class="hidden bg-white rounded-2xl p-8 mb-4">
                     <div class="text-8xl mb-4">🧑</div>

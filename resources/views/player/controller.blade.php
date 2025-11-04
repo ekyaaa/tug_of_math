@@ -120,6 +120,16 @@
                     console.log('🎉 Countdown starting on controller:', data);
                     startCountdown();
                 })
+                .listen('.game.over', function(data) {
+                    console.log('🏆 Game Over event received:', data);
+                    
+                    // Check if this player won or lost
+                    if (data.winnerId === playerId) {
+                        showWinnerModal(data.winnerName);
+                    } else if (data.loserId === playerId) {
+                        showLoserModal(data.winnerName);
+                    }
+                })
                 .listen('.player.score.updated', function(data) {
                     console.log('Score updated:', data);
                     if (data.playerId === playerId) {
@@ -293,6 +303,87 @@ Socket Connected: ${window.Echo?.connector?.socket?.connected || 'N/A'}
             gameReady = true;
             console.log('✅ Game forced to READY! gameReady =', gameReady);
             alert('Game forced to start! You can now submit answers.');
+        }
+
+        function showWinnerModal(winnerName) {
+            // Disable number pad
+            const numberButtons = document.querySelectorAll('.number-btn');
+            numberButtons.forEach(btn => {
+                btn.disabled = true;
+                btn.style.opacity = '0.5';
+                btn.style.cursor = 'not-allowed';
+            });
+            
+            // Create winner modal
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 flex items-center justify-center bg-black/90 z-50';
+            modal.innerHTML = `
+                <div class="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-3xl p-12 text-center transform scale-0 transition-transform max-w-md">
+                    <div class="text-8xl mb-4">🏆</div>
+                    <h2 class="text-5xl font-bold text-white mb-4 drop-shadow-lg">SELAMAT!</h2>
+                    <p class="text-3xl font-bold text-white mb-2">${winnerName}</p>
+                    <p class="text-2xl text-white/90 mb-8">Kamu adalah pemenangnya! 🎉</p>
+                    <div class="bg-white/20 rounded-2xl p-4 mb-6">
+                        <p class="text-white text-lg font-semibold">
+                            Hebat! Kemampuan matematikamu luar biasa!
+                        </p>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            // Animate modal entrance
+            setTimeout(() => {
+                modal.firstElementChild.classList.add('scale-100');
+                modal.firstElementChild.classList.remove('scale-0');
+            }, 100);
+        }
+
+        function showLoserModal(winnerName) {
+            // Disable number pad
+            const numberButtons = document.querySelectorAll('.number-btn');
+            numberButtons.forEach(btn => {
+                btn.disabled = true;
+                btn.style.opacity = '0.5';
+                btn.style.cursor = 'not-allowed';
+            });
+            
+            // Array of motivational messages
+            const motivationalMessages = [
+                "Jangan menyerah! Coba lagi pasti bisa! 💪",
+                "Kamu sudah bagus! Latihan lagi ya! 🌟",
+                "Hampir menang! Sedikit lagi pasti bisa! ⚡",
+                "Tetap semangat! Kamu pasti bisa lebih baik! 🚀",
+                "Bagus sekali! Lain kali pasti menang! 🎯"
+            ];
+            
+            const randomMessage = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
+            
+            // Create loser modal
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 flex items-center justify-center bg-black/90 z-50';
+            modal.innerHTML = `
+                <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl p-12 text-center transform scale-0 transition-transform max-w-md">
+                    <div class="text-8xl mb-4">💪</div>
+                    <h2 class="text-4xl font-bold text-white mb-4 drop-shadow-lg">Game Berakhir</h2>
+                    <p class="text-2xl text-white/90 mb-2">Pemenang: ${winnerName}</p>
+                    <div class="bg-white/20 rounded-2xl p-6 my-6">
+                        <p class="text-white text-xl font-semibold mb-3">
+                            ${randomMessage}
+                        </p>
+                        <p class="text-white/80 text-lg">
+                            Setiap kesalahan adalah kesempatan untuk belajar! 📚
+                        </p>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            // Animate modal entrance
+            setTimeout(() => {
+                modal.firstElementChild.classList.add('scale-100');
+                modal.firstElementChild.classList.remove('scale-0');
+            }, 100);
         }
 
         async function submitAnswer() {

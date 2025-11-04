@@ -9,6 +9,7 @@ use App\Models\QuestionModel;
 use App\Events\GameStarted;
 use App\Events\CountdownStart;
 use App\Events\DeviceReady;
+use App\Events\GameOver;
 use App\Helpers\QuestionHelper;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Log;
@@ -178,6 +179,26 @@ class GameController extends Controller
             Cache::forget("game_{$gameId}_device_controller-left_ready");
             Cache::forget("game_{$gameId}_device_controller-right_ready");
         }
+        
+        return response()->json(['success' => true]);
+    }
+
+    public function gameOver(Request $request)
+    {
+        $winnerId = $request->winnerId;
+        $winnerName = $request->winnerName;
+        $loserId = $request->loserId;
+        $loserName = $request->loserName;
+        
+        Log::info('🏆 Game Over', [
+            'winner_id' => $winnerId,
+            'winner_name' => $winnerName,
+            'loser_id' => $loserId,
+            'loser_name' => $loserName
+        ]);
+        
+        // Broadcast game over event
+        event(new GameOver($winnerId, $winnerName, $loserId, $loserName));
         
         return response()->json(['success' => true]);
     }

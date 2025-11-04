@@ -12,6 +12,7 @@ Route::get('/game/lobby', [GameController::class, 'lobby'])->name('game.lobby');
 Route::post('/game/create', [GameController::class, 'createGame'])->name('game.create');
 Route::post('/game/start-countdown', [GameController::class, 'startCountdown'])->name('game.startCountdown');
 Route::post('/game/device-ready', [GameController::class, 'deviceReady'])->name('game.deviceReady');
+Route::post('/game/game-over', [GameController::class, 'gameOver'])->name('game.gameOver');
 Route::get('/game/{game}', [GameController::class, 'show'])->name('game.show');
 
 // QR Code generation
