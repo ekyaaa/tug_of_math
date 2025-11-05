@@ -262,30 +262,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Check if rope center crossed the border (150px = half of 300px border width)
         if (Math.abs(shift) >= 150) {
-            gameEnded = true; // Mark game as ended
-            if (shift > 0) {
-                // Left player crossed the border (left won)
-                showWinner(leftPlayer.name);
-            } else {
-                // Right player crossed the border (right won)
-                showWinner(rightPlayer.name);
-            }
+            gameEnded = true;
+            const winner = diff > 0 ? leftPlayer.name : rightPlayer.name;
+            setTimeout(() => showWinner(winner), 500);
             return;
-        }
-
-        // Visual feedback for winner (using opacity)
-        const leftPerson = document.getElementById('left-person');
-        const rightPerson = document.getElementById('right-person');
-
-        if (diff > 0) {
-            leftPerson.style.opacity = '1';
-            rightPerson.style.opacity = '0.7';
-        } else if (diff < 0) {
-            leftPerson.style.opacity = '0.7';
-            rightPerson.style.opacity = '1';
-        } else {
-            leftPerson.style.opacity = '1';
-            rightPerson.style.opacity = '1';
         }
     }
 
