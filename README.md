@@ -30,12 +30,6 @@ Tug of Math is an educational game that combines mathematics with competitive ga
 - **Mobile Controllers**: Players input answers using custom number pad
 - **Real-time sync**: All devices stay synchronized via WebSocket
 
-### 🎨 Beautiful UI
-- Gradient purple theme with glassmorphism effects
-- Smooth animations and transitions
-- Responsive design for all screen sizes
-- Character avatars for player representation
-
 ## 🛠️ Tech Stack
 
 ### Backend
@@ -184,45 +178,6 @@ php artisan serve
 4. **Watch the tug-of-war** animation on the monitor
 5. First player to reach **10 correct answers wins**!
 
-## 📁 Project Structure
-
-```
-tug_of_math/
-├── app/
-│   ├── Events/              # Broadcasting events
-│   │   ├── GameStarted.php
-│   │   ├── PlayerJoined.php
-│   │   ├── PlayerScoreUpdated.php
-│   │   └── PlayerQuestionUpdated.php
-│   ├── Http/Controllers/
-│   │   ├── GameController.php
-│   │   └── PlayerController.php
-│   └── Models/
-│       ├── GameModel.php
-│       ├── PlayerModel.php
-│       └── QuestionModel.php
-├── database/
-│   └── migrations/
-│       ├── create_player.php
-│       ├── create_game.php
-│       └── create_question.php
-├── resources/
-│   └── views/
-│       ├── layouts/
-│       │   └── app.blade.php       # Main layout with WebSocket setup
-│       ├── game/
-│       │   ├── index.blade.php     # Landing page
-│       │   ├── lobby.blade.php     # Lobby with QR codes
-│       │   └── show.blade.php      # Game screen
-│       └── player/
-│           ├── join.blade.php      # Player join page
-│           └── controller.blade.php # Player controller
-├── routes/
-│   └── web.php
-├── laravel-echo-server.json        # Echo server configuration
-└── README.md
-```
-
 ## 🔧 Configuration
 
 ### Laravel Echo Server
@@ -276,124 +231,9 @@ To play across devices on the same WiFi:
 
 3. Access from mobile: `http://YOUR_IP:8000`
 
-## 🐛 Troubleshooting
-
-### WebSocket Not Connecting
-
-```bash
-# Check if Echo Server is running
-netstat -an | findstr "6001"
-
-# Should show: TCP 0.0.0.0:6001 ... LISTENING
-
-# Restart Echo Server
-laravel-echo-server start --force
-```
-
-### Redis Connection Issues
-
-```bash
-# Check Redis status
-redis-cli ping
-# Should return: PONG
-
-# Clear Redis cache
-redis-cli FLUSHALL
-```
-
-### Database Errors
-
-```bash
-# Reset database
-php artisan migrate:fresh
-
-# Clear all caches
-php artisan config:clear
-php artisan cache:clear
-```
-
-### Browser Not Updating
-
-1. Hard refresh: `Ctrl + Shift + R`
-2. Clear browser cache
-3. Check console for errors (`F12`)
-
-## 📊 Database Schema
-
-### Players Table (`m_player`)
-- `id` - Primary key
-- `name` - Player name
-- `side` - left/right
-- `score` - Current score
-- `timestamps`
-
-### Games Table (`m_game`)
-- `id` - Primary key
-- `player1_id` - Foreign key to players
-- `player2_id` - Foreign key to players
-- `winner_id` - Foreign key to players (nullable)
-- `timestamps`
-
-### Questions Table (`t_question`)
-- `id` - Primary key
-- `game_id` - Foreign key to games
-- `player_id` - Foreign key to players
-- `question_text` - The math question
-- `correct_answer` - The correct answer
-- `player_answer` - Player's submitted answer (nullable)
-- `timestamps`
-
-## 🎯 API Endpoints
-
-### Game Routes
-- `GET /` - Landing page
-- `GET /game/lobby` - Lobby with QR codes
-- `POST /game/create` - Create new game
-- `GET /game/{game}` - Game screen
-
-### Player Routes
-- `GET /join/{side}` - Player join page (left/right)
-- `POST /join/{side}` - Submit player join
-- `GET /player/{player}/controller` - Player controller interface
-- `POST /player/{player}/answer` - Submit answer
-
-## 🔄 WebSocket Events
-
-### Broadcast Events
-- `PlayerJoined` - When a player joins (channel: `lobby`)
-- `GameStarted` - When game starts (channel: `game-channel`)
-- `PlayerScoreUpdated` - When score changes (channel: `game-channel`)
-- `PlayerQuestionUpdated` - When new question generated (channel: `game-channel`)
-
-## 🚧 Future Enhancements
-
-- [ ] Add difficulty levels (Easy, Medium, Hard)
-- [ ] Implement game modes (Time Attack, Endless)
-- [ ] Add sound effects and music
-- [ ] Save game history and statistics
-- [ ] Leaderboard system
-- [ ] Multiplayer tournament support
-- [ ] Custom question sets
-- [ ] Power-ups and special items
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
 ## 📝 License
 
 This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-## 👨‍💻 Author
-
-**ekyaaa**
-- GitHub: [@ekyaaa](https://github.com/ekyaaa)
 
 ## 🙏 Acknowledgments
 

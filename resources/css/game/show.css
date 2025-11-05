@@ -1,0 +1,119 @@
+@keyframes struggle {
+
+    0%,
+    100% {
+        transform: translateX(3px);
+    }
+
+    50% {
+        transform: translateX(-3px);
+    }
+}
+
+@keyframes swing {
+
+    0%,
+    100% {
+        transform: translateX(3px);
+    }
+
+    50% {
+        transform: translateX(-3px);
+    }
+}
+
+.struggle-animation {
+    animation: struggle 1s ease-in-out infinite;
+}
+
+.tug-container {
+    position: relative;
+    height: 300px;
+}
+
+
+.rope-animation {
+    animation: swing 1s ease-in-out infinite;
+}
+
+.border-overlay {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 100%;
+    border-left: 4px solid rgba(255, 255, 255, 0.5);
+    border-right: 4px solid rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.chat-bubble {
+    position: absolute;
+    top: -60px;
+    background: white;
+    color: black;
+    padding: 8px 12px;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+    z-index: 20;
+    white-space: nowrap;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    width: fit-content;
+    min-width: 60px;
+}
+
+.chat-bubble.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.chat-bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 20px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+
+@keyframes typing {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.typing-indicator {
+    display: inline-block;
+}
+
+.typing-indicator span {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: black;
+    margin: 0 1px;
+    animation: typing 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}

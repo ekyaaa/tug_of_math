@@ -54,7 +54,7 @@
         // Setup Laravel Echo with Socket.io v2
         window.Echo = new Echo({
             broadcaster: 'socket.io',
-            host: '172.16.106.148:6001',
+            host: '192.168.70.63:6001',
             transports: ['websocket', 'polling', 'flashsocket']
         });
 
